@@ -1,0 +1,11 @@
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\JogoDosAnimais.exe.config
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\JogoDosAnimais.exe
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\JogoDosAnimais.pdb
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.csprojResolveAssemblyReference.cache
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.frmAnimais.resources
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.Properties.Resources.resources
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.csproj.GenerateResource.Cache
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.exe
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.pdb
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\Jogo.dll
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\Jogo.pdb

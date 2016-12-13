@@ -1,0 +1,5 @@
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo\bin\Debug\Jogo.dll
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo\bin\Debug\Jogo.pdb
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo\obj\Debug\Jogo.dll
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo\obj\Debug\Jogo.pdb
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo\obj\Debug\Jogo.csprojResolveAssemblyReference.cache
