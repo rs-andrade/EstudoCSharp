@@ -1,10 +1,6 @@
 ﻿using Jogo.Animais.Interface;
-using Jogo.Utils.Message;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Jogo.Animais.Enum.TipoAnimalEnum;
 
 namespace Jogo.Animais

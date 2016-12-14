@@ -5,3 +5,5 @@ C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\bin\Debug\Jogo.pdb
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\obj\Debug\Jogo.Test.csprojResolveAssemblyReference.cache
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\obj\Debug\Jogo.Test.dll
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\obj\Debug\Jogo.Test.pdb
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\bin\Debug\Jogo.Test.dll.CodeAnalysisLog.xml
+C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\Jogo.Test\bin\Debug\Jogo.Test.dll.lastcodeanalysissucceeded
