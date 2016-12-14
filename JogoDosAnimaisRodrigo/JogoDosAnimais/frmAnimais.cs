@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jogo.Animais;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace JogoDosAnimais
     public partial class frmAnimais : Form
     {
         private Jogo.Animais.Adivinhacao jogoDosAnimais;
+
         public frmAnimais()
         {
             InitializeComponent();
-            jogoDosAnimais = new Jogo.Animais.Adivinhacao();
+            var interacaoUsuario = new InteracaoUsuario();
+            jogoDosAnimais = new Jogo.Animais.Adivinhacao(interacaoUsuario);
         }
 
         private void btnOk_Click(object sender, EventArgs e)

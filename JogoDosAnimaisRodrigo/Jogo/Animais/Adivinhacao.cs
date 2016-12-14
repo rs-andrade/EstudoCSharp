@@ -1,4 +1,5 @@
 ﻿using Jogo.Animais.Enum;
+using Jogo.Animais.Interface;
 using Jogo.Utils.Message;
 using System;
 using System.Collections.Generic;
@@ -11,33 +12,32 @@ using static Jogo.Animais.Enum.TipoAnimalEnum;
 namespace Jogo.Animais
 {
     public class Adivinhacao
-    {
-        const string perguntaHabitat = "O animal que você pensou vive na água ?";
-        const string perguntaAnimal = "O animal que você pensou é {0} ?";
-        const string perguntaAcao = "O animal que você pensou {0} ?";
-        const string avisoAcerto = "Acertei de novo!";
-        private List<Animal> animais;
-        
+    {        
+        private List<Animal> _animais;
+        private IInteracaoUsuario _interacaoUsuario;       
 
-        public Adivinhacao()
+        public Adivinhacao(IInteracaoUsuario interacaoUsuario)
         {
-            animais = new List<Animal>();
-            animais.Add(new Animal { Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>() });
-            animais.Add(new Animal { Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>() });            
+            _animais = new List<Animal>();
+            _animais.Add(new Animal { Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>() });
+            _animais.Add(new Animal { Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>() });
+            _interacaoUsuario = interacaoUsuario;         
         }
         public void Adivinhar()
         {
             var acoesEscolhidas = new List<AcaoAnimal>(); ;
-            var resultadoHabitat = MessageQuestion.ConfirmationMessage(perguntaHabitat);
-            var animaisPorTipo = animais.Where(o => o.TipoAnimal == (resultadoHabitat == DialogResult.Yes ? TipoAnimal.Aquatico :
-              TipoAnimal.Terrestre));
+            var viveNaAgua = _interacaoUsuario.PerguntarSeAnimalViveNaAgua();
+            var animaisPorTipo = _animais.Where(o => o.TipoAnimal == (viveNaAgua ? TipoAnimal.Aquatico : TipoAnimal.Terrestre));
 
             while (animaisPorTipo.Count() != 1)
             {
                 animaisPorTipo = SelecionarAnimaisPorAcao(animaisPorTipo, acoesEscolhidas);
             }
 
-            PerguntaSeAcertou(animaisPorTipo.First());
+            if (_interacaoUsuario.PerguntaSeAcertouAnimal(animaisPorTipo.First().Nome))
+                _interacaoUsuario.AvisarUsuarioAcerto();
+            else
+                _animais.Add(Animal.CriarAnimalPerguntando(animaisPorTipo.First(), _interacaoUsuario));
 
         }
 
@@ -49,10 +49,10 @@ namespace Jogo.Animais
             {
                 if (acoesEscolhidas.Contains(acaoAnimal))
                     animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
-                else if (MessageQuestion.ConfirmationMessage(String.Format(perguntaAcao, acaoAnimal.Acao)) == DialogResult.Yes)
+                else if (_interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
                 {
                     acoesEscolhidas.Add(acaoAnimal);
-                    animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));                    
+                    animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
                 }
                 else
                 {
@@ -64,14 +64,6 @@ namespace Jogo.Animais
 
             }
             return animaisSelecionados;
-        }
-
-        private void PerguntaSeAcertou(Animal animal)
-        {
-            if (MessageQuestion.ConfirmationMessage(String.Format(perguntaAnimal, animal.Nome)) == DialogResult.Yes)
-                MessageBox.Show(avisoAcerto);
-            else
-                animais.Add(Animal.CriarAnimalPerguntando(animal));
         }
     }
 }

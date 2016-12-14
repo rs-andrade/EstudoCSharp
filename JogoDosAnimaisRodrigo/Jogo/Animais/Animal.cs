@@ -1,4 +1,5 @@
-﻿using Jogo.Utils.Message;
+﻿using Jogo.Animais.Interface;
+using Jogo.Utils.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,22 +11,17 @@ namespace Jogo.Animais
 {
     public class Animal
     {
-        const string perguntaQualAnimal = "Qual animal você pensou ?";
-        const string captionPerguntaAnimal = "Desisto";
-        const string perguntaAcao = "Um(a) {0} ______________ mas um(a) {1} não";
-        const string captionPerguntaAcao = "Desisto";
-
         public String Nome { get; set; }
         public List<AcaoAnimal> Acoes { get; set; }
         public TipoAnimal TipoAnimal { get; set; }
 
-        public static Animal CriarAnimalPerguntando(Animal animalReferencia)
+        public static Animal CriarAnimalPerguntando(Animal animalReferencia, IInteracaoUsuario interacaoUsuario)
         {
             var animal = new Animal();
-            animal.Nome = MessageInput.ShowDialog(perguntaQualAnimal, captionPerguntaAnimal);
+            animal.Nome = interacaoUsuario.PerguntaNomeNovoAnimal();
             animal.Acoes = new List<AcaoAnimal>();
             animal.Acoes.AddRange(animalReferencia.Acoes);
-            animal.Acoes.Add(new AcaoAnimal { Acao = MessageInput.ShowDialog(string.Format(perguntaAcao, animal.Nome, animalReferencia.Nome), captionPerguntaAcao) });
+            animal.Acoes.Add(new AcaoAnimal { Acao =  interacaoUsuario.PerguntaAcaoNovoAnimal(animal.Nome, animalReferencia.Nome)});
             animal.TipoAnimal = animalReferencia.TipoAnimal;
             return animal;
         }
@@ -34,5 +30,6 @@ namespace Jogo.Animais
         {
             return Nome;
         }
+
     }
 }

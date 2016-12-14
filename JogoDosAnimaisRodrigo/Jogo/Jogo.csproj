@@ -45,7 +45,10 @@
     <Compile Include="Animais\Adivinhacao.cs" />
     <Compile Include="Animais\Animal.cs" />
     <Compile Include="Animais\Enum\TipoAnimalEnum.cs" />
+    <Compile Include="Animais\InteracaoUsuario.cs" />
+    <Compile Include="Animais\Interface\IInteracaoUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Message\MessageInformation.cs" />
     <Compile Include="Utils\Message\MessageInput.cs" />
     <Compile Include="Utils\Message\MessageQuestion.cs" />
   </ItemGroup>
