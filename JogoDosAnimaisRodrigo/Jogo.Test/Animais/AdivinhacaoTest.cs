@@ -13,15 +13,50 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharMacaco()
         {
-            var interacaoUsuario = new InteracaoUsuarioTest
+            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, true);
+            var adivinhacao = new Adivinhacao();
+            var resultado = adivinhacao.Adivinhar(interacaoUsuario);
+            Assert.AreEqual(2, adivinhacao.Animais.Count);
+            Assert.AreEqual("Macaco", resultado.Animal.Nome);
+        }        
+
+        [TestMethod]
+        public void AdivinharTubarao()
+        {
+            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(true, true);
+            var adivinhacao = new Adivinhacao();
+            var resultado = adivinhacao.Adivinhar(interacaoUsuario);
+            Assert.AreEqual(2, adivinhacao.Animais.Count);
+            Assert.AreEqual("Tubarão", resultado.Animal.Nome);
+        }
+
+        [TestMethod]
+        public void AdivinharCavalo()
+        {
+            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, false);
+            interacaoUsuario.AcaoNovoAnimal = "Salta";
+            interacaoUsuario.NomeNovoAnimal = "Cavalo";
+            var adivinhacao = new Adivinhacao();
+            var resultado = adivinhacao.Adivinhar(interacaoUsuario);
+            Assert.AreEqual(3, adivinhacao.Animais.Count);
+            Assert.AreEqual("Cavalo", resultado.Animal.Nome);
+            interacaoUsuario.AcertouAcaoAnimal = true;
+            interacaoUsuario.AcertouAnimal = true;
+            resultado = adivinhacao.Adivinhar(interacaoUsuario);
+            Assert.AreEqual(3, adivinhacao.Animais.Count);
+            Assert.AreEqual("Cavalo", resultado.Animal.Nome);
+        }
+
+        private static InteracaoUsuarioTest CriarInteracao(bool viveNaAgua, bool acertouAnimal)
+        {
+            return new InteracaoUsuarioTest
             {
-                AcaoNovoAnimal = "Salta",
-                NomeNovoAnimal = "Cavalo",
+                AcaoNovoAnimal = "",
+                NomeNovoAnimal = "",
                 AcertouAcaoAnimal = true,
-                AnimalViveNaAgua = false,
-                AcertouAnimal = true
+                AnimalViveNaAgua = viveNaAgua,
+                AcertouAnimal = acertouAnimal
             };
-            var adivinhacao = new Adivinhacao(interacaoUsuario);
         }
     }
 }

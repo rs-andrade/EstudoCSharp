@@ -18,13 +18,14 @@ namespace JogoDosAnimais
         public frmAnimais()
         {
             InitializeComponent();
-            var interacaoUsuario = new InteracaoUsuario();
-            jogoDosAnimais = new Jogo.Animais.Adivinhacao(interacaoUsuario);
+            
+            jogoDosAnimais = new Jogo.Animais.Adivinhacao();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
-        {            
-            jogoDosAnimais.Adivinhar();
+        {
+            var interacaoUsuario = new InteracaoUsuario();
+            jogoDosAnimais.Adivinhar(interacaoUsuario);
         }
     }
 }

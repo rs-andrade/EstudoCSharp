@@ -13,46 +13,73 @@ namespace Jogo.Animais
 {
     public class Adivinhacao
     {        
-        private List<Animal> _animais;
-        private IInteracaoUsuario _interacaoUsuario;       
+        private List<Animal> _animais;    
 
-        public Adivinhacao(IInteracaoUsuario interacaoUsuario)
+        public List<Animal> Animais
         {
-            _animais = new List<Animal>();
-            _animais.Add(new Animal { Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>() });
-            _animais.Add(new Animal { Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>() });
-            _interacaoUsuario = interacaoUsuario;         
-        }
-        public void Adivinhar()
-        {
-            var acoesEscolhidas = new List<AcaoAnimal>(); ;
-            var viveNaAgua = _interacaoUsuario.PerguntarSeAnimalViveNaAgua();
-            var animaisPorTipo = _animais.Where(o => o.TipoAnimal == (viveNaAgua ? TipoAnimal.Aquatico : TipoAnimal.Terrestre));
-
-            while (animaisPorTipo.Count() != 1)
+            get
             {
-                animaisPorTipo = SelecionarAnimaisPorAcao(animaisPorTipo, acoesEscolhidas);
+                return _animais;
             }
 
-            if (_interacaoUsuario.PerguntaSeAcertouAnimal(animaisPorTipo.First().Nome))
-                _interacaoUsuario.AvisarUsuarioAcerto();
-            else
-                _animais.Add(Animal.CriarAnimalPerguntando(animaisPorTipo.First(), _interacaoUsuario));
-
+            set
+            {
+                _animais = value;
+            }
         }
 
-        private IEnumerable<Animal> SelecionarAnimaisPorAcao(IEnumerable<Animal> animaisPorTipo, List<AcaoAnimal> acoesEscolhidas)
+        public Adivinhacao()
         {
-            var animaisSelecionados = animaisPorTipo;
-            var acoesAnimais = animaisPorTipo.SelectMany(o => o.Acoes).Distinct();
+            Animais = new List<Animal>();
+            Animais.Add(new Animal { Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>() });
+            Animais.Add(new Animal { Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>() });
+        }
+
+        public ResultadoAdivinhacao Adivinhar(IInteracaoUsuario interacaoUsuario)
+        {
+            var acoesEscolhidas = new List<AcaoAnimal>();
+            var animaisPorTipo = FiltrarAnimaisPorTipo(interacaoUsuario);
+            var resultadoAdivinhacao = new ResultadoAdivinhacao();
+
+            while (animaisPorTipo.Count() > 1)
+                animaisPorTipo = SelecionarAnimaisPorAcao(animaisPorTipo, acoesEscolhidas, interacaoUsuario);
+
+            if (interacaoUsuario.PerguntaSeAcertouAnimal(animaisPorTipo.First().Nome))
+            {
+                resultadoAdivinhacao.Adivinhou = true;
+                resultadoAdivinhacao.Animal = animaisPorTipo.First();
+                interacaoUsuario.AvisarUsuarioAcerto();
+            }
+            else
+            {
+                resultadoAdivinhacao.Adivinhou = false;
+                resultadoAdivinhacao.Animal = Animal.CriarAnimalPerguntando(animaisPorTipo.First(), interacaoUsuario);
+                Animais.Add(resultadoAdivinhacao.Animal);
+            }
+
+            return resultadoAdivinhacao;
+        }
+
+        private IEnumerable<Animal> FiltrarAnimaisPorTipo(IInteracaoUsuario interacaoUsuario)
+        {
+            var viveNaAgua = interacaoUsuario.PerguntarSeAnimalViveNaAgua();
+            return Animais.Where(o => o.TipoAnimal == (viveNaAgua ? TipoAnimal.Aquatico : TipoAnimal.Terrestre));
+        }
+
+        private IEnumerable<Animal> SelecionarAnimaisPorAcao(IEnumerable<Animal> animais, List<AcaoAnimal> acoesJaEscolhidas,
+            IInteracaoUsuario interacaoUsuario)
+        {
+            var animaisSelecionados = animais;
+            var acoesAnimais = animais.SelectMany(o => o.Acoes).Distinct();
             foreach (var acaoAnimal in acoesAnimais)
             {
-                if (acoesEscolhidas.Contains(acaoAnimal))
+                if (acoesJaEscolhidas.Contains(acaoAnimal))
                     animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
-                else if (_interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
+                else if (interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
                 {
-                    acoesEscolhidas.Add(acaoAnimal);
+                    acoesJaEscolhidas.Add(acaoAnimal);
                     animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
+                    break;
                 }
                 else
                 {
