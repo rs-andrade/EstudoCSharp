@@ -11,7 +11,7 @@ namespace Jogo.Animais
             if (other == null)
                 return false;
 
-            return (this.Acao == other.Acao);
+            return (Acao == other.Acao);
         }
 
         public override string ToString()

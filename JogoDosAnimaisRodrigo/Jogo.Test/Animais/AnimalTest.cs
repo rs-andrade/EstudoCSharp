@@ -13,12 +13,16 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void CriarAnimalComSucesso()
         {
-            var animalReferencia = new Animal();
-            animalReferencia.Nome = "Cachorro";
-            animalReferencia.TipoAnimal = TipoAnimalEnum.TipoAnimal.Terrestre;
-            animalReferencia.Acoes = new List<AcaoAnimal>();
-            animalReferencia.Acoes.Add(new AcaoAnimal { Acao = "Corre" });
-            animalReferencia.Acoes.Add(new AcaoAnimal { Acao = "Morde" });
+            var animalReferencia = new Animal
+            {
+                Nome = "Cachorro",
+                TipoAnimal = TipoAnimalEnum.TipoAnimal.Terrestre,
+                Acoes = new List<AcaoAnimal>
+                {
+                    new AcaoAnimal {Acao = "Corre"},
+                    new AcaoAnimal {Acao = "Morde"}
+                }
+            };
 
             var interacaoUsuario = new InteracaoUsuarioTest {
                 AcaoNovoAnimal = "Salta",
@@ -28,7 +32,7 @@ namespace Jogo.Test.Animais
             var novoAnimal = Animal.CriarAnimalPerguntando(animalReferencia, interacaoUsuario);
 
             Assert.AreEqual(animalReferencia.TipoAnimal, novoAnimal.TipoAnimal);
-            Assert.AreEqual(novoAnimal.Acoes.Where(x => x.Acao == "Corre" || x.Acao == "Morde" || x.Acao == "Salta").Count(), 3);       
+            Assert.AreEqual(novoAnimal.Acoes.Count(x => x.Acao == "Corre" || x.Acao == "Morde" || x.Acao == "Salta"), 3);       
         }
     }
 }

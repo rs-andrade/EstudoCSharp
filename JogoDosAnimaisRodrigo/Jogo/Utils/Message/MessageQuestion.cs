@@ -4,10 +4,10 @@ namespace Jogo.Utils.Message
 {
     public class MessageQuestion
     {
-        const string captionConfirmation = "Confirmação";
+        private const string CaptionConfirmation = "Confirmação";
         public static DialogResult ConfirmationMessage(string message)
         {
-            return MessageBox.Show(message, captionConfirmation, MessageBoxButtons.YesNo);
+            return MessageBox.Show(message, CaptionConfirmation, MessageBoxButtons.YesNo);
         }
     }
 }

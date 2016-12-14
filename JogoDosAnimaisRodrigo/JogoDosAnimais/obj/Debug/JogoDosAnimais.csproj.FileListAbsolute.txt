@@ -9,5 +9,3 @@ C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimai
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\obj\Debug\JogoDosAnimais.pdb
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\Jogo.dll
 C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\Jogo.pdb
-C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\JogoDosAnimais.exe.CodeAnalysisLog.xml
-C:\Git\EstudoCSharp\JogoDosAnimaisRodrigo\JogoDosAnimais\bin\Debug\JogoDosAnimais.exe.lastcodeanalysissucceeded

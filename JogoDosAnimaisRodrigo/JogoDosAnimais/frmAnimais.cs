@@ -4,21 +4,21 @@ using System.Windows.Forms;
 
 namespace JogoDosAnimais
 {
-    public partial class frmAnimais : Form
+    public partial class FrmAnimais : Form
     {
-        private Jogo.Animais.Adivinhacao jogoDosAnimais;
+        private readonly Adivinhacao _jogoDosAnimais;
 
-        public frmAnimais()
+        public FrmAnimais()
         {
             InitializeComponent();
             
-            jogoDosAnimais = new Jogo.Animais.Adivinhacao();
+            _jogoDosAnimais = new Adivinhacao();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
         {
             var interacaoUsuario = new InteracaoUsuario();
-            jogoDosAnimais.Adivinhar(interacaoUsuario);
+            _jogoDosAnimais.Adivinhar(interacaoUsuario);
         }
     }
 }

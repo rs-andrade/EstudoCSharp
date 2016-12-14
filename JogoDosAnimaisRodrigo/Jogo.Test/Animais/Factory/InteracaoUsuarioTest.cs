@@ -13,15 +13,11 @@ namespace Jogo.Test.Animais.Factory
 
         public void AvisarUsuarioAcerto()
         {
-            return;
         }
 
         public bool PerguntaAcaoAnimal(AcaoAnimal acaoAnimal)
         {
-            if (acaoAnimal.Acao == "Mia")
-                return true;
-            else
-                return AcertouAcaoAnimal;
+            return acaoAnimal.Acao == "Mia" || AcertouAcaoAnimal;
         }
 
         public string PerguntaAcaoNovoAnimal(string nomeNovoAnimal, string nomeAnimalReferencia)

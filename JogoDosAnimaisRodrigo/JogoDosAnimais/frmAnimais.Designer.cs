@@ -1,6 +1,6 @@
 ﻿namespace JogoDosAnimais
 {
-    partial class frmAnimais
+    partial class FrmAnimais
     {
         /// <summary>
         /// Required designer variable.
@@ -59,7 +59,7 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.lblPense);
             this.MaximizeBox = false;
-            this.Name = "frmAnimais";
+            this.Name = "FrmAnimais";
             this.Text = "Animais";
             this.ResumeLayout(false);
             this.PerformLayout();

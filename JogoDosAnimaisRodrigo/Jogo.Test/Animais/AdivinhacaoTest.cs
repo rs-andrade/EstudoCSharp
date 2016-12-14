@@ -10,7 +10,7 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharMacaco()
         {
-            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, true);
+            var interacaoUsuario = CriarInteracao(false, true);
             var adivinhacao = new Adivinhacao();
             var resultado = adivinhacao.Adivinhar(interacaoUsuario);
             Assert.AreEqual(2, adivinhacao.Animais.Count);
@@ -20,7 +20,7 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharTubarao()
         {
-            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(true, true);
+            var interacaoUsuario = CriarInteracao(true, true);
             var adivinhacao = new Adivinhacao();
             var resultado = adivinhacao.Adivinhar(interacaoUsuario);
             Assert.AreEqual(2, adivinhacao.Animais.Count);
@@ -30,7 +30,7 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharCavalo()
         {
-            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, false);
+            var interacaoUsuario = CriarInteracao(false, false);
             interacaoUsuario.AcaoNovoAnimal = "Salta";
             interacaoUsuario.NomeNovoAnimal = "Cavalo";
             var adivinhacao = new Adivinhacao();
@@ -47,7 +47,7 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharCavaloESapo()
         {
-            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, false);
+            var interacaoUsuario = CriarInteracao(false, false);
             interacaoUsuario.AcaoNovoAnimal = "Salta";
             interacaoUsuario.NomeNovoAnimal = "Cavalo";
             var adivinhacao = new Adivinhacao();
@@ -76,7 +76,7 @@ namespace Jogo.Test.Animais
         [TestMethod]
         public void AdivinharCavaloESapoEGato()
         {
-            InteracaoUsuarioTest interacaoUsuario = CriarInteracao(false, false);
+            var interacaoUsuario = CriarInteracao(false, false);
             interacaoUsuario.AcaoNovoAnimal = "Salta";
             interacaoUsuario.NomeNovoAnimal = "Cavalo";
             var adivinhacao = new Adivinhacao();

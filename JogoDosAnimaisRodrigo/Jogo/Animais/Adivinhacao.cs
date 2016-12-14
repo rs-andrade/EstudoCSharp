@@ -6,26 +6,16 @@ using static Jogo.Animais.Enum.TipoAnimalEnum;
 namespace Jogo.Animais
 {
     public class Adivinhacao
-    {        
-        private List<Animal> _animais;
-        public List<Animal> Animais
-        {
-            get
-            {
-                return _animais;
-            }
-
-            set
-            {
-                _animais = value;
-            }
-        }
+    {
+        public List<Animal> Animais { get; set; }
 
         public Adivinhacao()
         {
-            Animais = new List<Animal>();
-            Animais.Add(new Animal { Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>() });
-            Animais.Add(new Animal { Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>() });
+            Animais = new List<Animal>
+            {
+                new Animal {Nome = "Tubarão", TipoAnimal = TipoAnimal.Aquatico, Acoes = new List<AcaoAnimal>()},
+                new Animal {Nome = "Macaco", TipoAnimal = TipoAnimal.Terrestre, Acoes = new List<AcaoAnimal>()}
+            };
         }
 
         public ResultadoAdivinhacao Adivinhar(IInteracaoUsuario interacaoUsuario)
@@ -74,18 +64,18 @@ namespace Jogo.Animais
             {
                 if (acoesJaEscolhidas.Contains(acaoAnimal))
                     continue;
-                else if (interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
+
+                if (interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
                 {
                     acoesJaEscolhidas.Add(acaoAnimal);
                     animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
                     break;
                 }
-                else
-                {
-                    animaisSelecionados = animaisSelecionados.Where(x => !x.Acoes.Contains(acaoAnimal));
-                    break;
-                }
+
+                animaisSelecionados = animaisSelecionados.Where(x => !x.Acoes.Contains(acaoAnimal));
+                break;
             }
+
             return animaisSelecionados;
         }
     }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace JogoDosAnimais
@@ -16,7 +13,7 @@ namespace JogoDosAnimais
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAnimais());
+            Application.Run(new FrmAnimais());
         }
     }
 }
