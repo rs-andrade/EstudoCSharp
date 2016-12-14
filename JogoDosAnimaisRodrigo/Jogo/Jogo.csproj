@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animais\AcaoAnimal.cs" />
     <Compile Include="Animais\Adivinhacao.cs" />
     <Compile Include="Animais\Animal.cs" />
     <Compile Include="Animais\Enum\TipoAnimalEnum.cs" />

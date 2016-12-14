@@ -16,16 +16,23 @@ namespace Jogo.Animais
         const string captionPerguntaAcao = "Desisto";
 
         public String Nome { get; set; }
-        public String Acao { get; set; }
+        public List<AcaoAnimal> Acoes { get; set; }
         public TipoAnimal TipoAnimal { get; set; }
 
         public static Animal CriarAnimalPerguntando(Animal animalReferencia)
         {
             var animal = new Animal();
             animal.Nome = MessageInput.ShowDialog(perguntaQualAnimal, captionPerguntaAnimal);
-            animal.Acao = MessageInput.ShowDialog(string.Format(perguntaAcao, animal.Nome, animalReferencia.Nome), captionPerguntaAcao);
+            animal.Acoes = new List<AcaoAnimal>();
+            animal.Acoes.AddRange(animalReferencia.Acoes);
+            animal.Acoes.Add(new AcaoAnimal { Acao = MessageInput.ShowDialog(string.Format(perguntaAcao, animal.Nome, animalReferencia.Nome), captionPerguntaAcao) });
             animal.TipoAnimal = animalReferencia.TipoAnimal;
             return animal;
+        }
+
+        public override string ToString()
+        {
+            return Nome;
         }
     }
 }
