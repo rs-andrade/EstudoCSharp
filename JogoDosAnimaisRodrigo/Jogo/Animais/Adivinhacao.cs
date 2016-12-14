@@ -13,8 +13,7 @@ namespace Jogo.Animais
 {
     public class Adivinhacao
     {        
-        private List<Animal> _animais;    
-
+        private List<Animal> _animais;
         public List<Animal> Animais
         {
             get
@@ -41,24 +40,23 @@ namespace Jogo.Animais
             var animaisPorTipo = FiltrarAnimaisPorTipo(interacaoUsuario);
             var resultadoAdivinhacao = new ResultadoAdivinhacao();
 
-            while (animaisPorTipo.Count() > 1)
-                animaisPorTipo = SelecionarAnimaisPorAcao(animaisPorTipo, acoesEscolhidas, interacaoUsuario);
+            var animalselecionado = SelecionarUnicoAnimal(interacaoUsuario, acoesEscolhidas, animaisPorTipo);
 
-            if (interacaoUsuario.PerguntaSeAcertouAnimal(animaisPorTipo.First().Nome))
+            if (interacaoUsuario.PerguntaSeAcertouAnimal(animalselecionado.Nome))
             {
                 resultadoAdivinhacao.Adivinhou = true;
-                resultadoAdivinhacao.Animal = animaisPorTipo.First();
+                resultadoAdivinhacao.Animal = animalselecionado;
                 interacaoUsuario.AvisarUsuarioAcerto();
             }
             else
             {
                 resultadoAdivinhacao.Adivinhou = false;
-                resultadoAdivinhacao.Animal = Animal.CriarAnimalPerguntando(animaisPorTipo.First(), interacaoUsuario);
+                resultadoAdivinhacao.Animal = Animal.CriarAnimalPerguntando(animalselecionado, interacaoUsuario);
                 Animais.Add(resultadoAdivinhacao.Animal);
             }
 
             return resultadoAdivinhacao;
-        }
+        }        
 
         private IEnumerable<Animal> FiltrarAnimaisPorTipo(IInteracaoUsuario interacaoUsuario)
         {
@@ -66,15 +64,22 @@ namespace Jogo.Animais
             return Animais.Where(o => o.TipoAnimal == (viveNaAgua ? TipoAnimal.Aquatico : TipoAnimal.Terrestre));
         }
 
+        private Animal SelecionarUnicoAnimal(IInteracaoUsuario interacaoUsuario, List<AcaoAnimal> acoesEscolhidas, IEnumerable<Animal> animaisPorTipo)
+        {
+            while (animaisPorTipo.Count() > 1)
+                animaisPorTipo = SelecionarAnimaisPorAcao(animaisPorTipo, acoesEscolhidas, interacaoUsuario);
+            return animaisPorTipo.First();
+        }
+
         private IEnumerable<Animal> SelecionarAnimaisPorAcao(IEnumerable<Animal> animais, List<AcaoAnimal> acoesJaEscolhidas,
             IInteracaoUsuario interacaoUsuario)
         {
             var animaisSelecionados = animais;
-            var acoesAnimais = animais.SelectMany(o => o.Acoes).Distinct();
+            var acoesAnimais = animaisSelecionados.SelectMany(o => o.Acoes).Distinct();
             foreach (var acaoAnimal in acoesAnimais)
             {
                 if (acoesJaEscolhidas.Contains(acaoAnimal))
-                    animaisSelecionados = animaisSelecionados.Where(x => x.Acoes.Contains(acaoAnimal));
+                    continue;
                 else if (interacaoUsuario.PerguntaAcaoAnimal(acaoAnimal))
                 {
                     acoesJaEscolhidas.Add(acaoAnimal);
@@ -86,9 +91,6 @@ namespace Jogo.Animais
                     animaisSelecionados = animaisSelecionados.Where(x => !x.Acoes.Contains(acaoAnimal));
                     break;
                 }
-                if (animaisSelecionados.Count() == 1)
-                    break;
-
             }
             return animaisSelecionados;
         }

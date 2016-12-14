@@ -23,7 +23,10 @@ namespace Jogo.Test.Animais.Factory
 
         public bool PerguntaAcaoAnimal(AcaoAnimal acaoAnimal)
         {
-            return AcertouAcaoAnimal;
+            if (acaoAnimal.Acao == "Mia")
+                return true;
+            else
+                return AcertouAcaoAnimal;
         }
 
         public string PerguntaAcaoNovoAnimal(string nomeNovoAnimal, string nomeAnimalReferencia)
